@@ -1,0 +1,11 @@
+<app-header></app-header>
+
+<main style="padding: 20px">
+  <h2>My Tasks</h2>
+
+  @for (taskItem of tasks; track taskItem.id) {
+  <app-task-card [task]="taskItem"></app-task-card>
+  } @empty {
+  <p>No tasks available. Time to relax!</p>
+  }
+</main>
