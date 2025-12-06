@@ -1,0 +1,23 @@
+<app-header></app-header>
+
+<main style="padding: 20px">
+  <div style="margin-bottom: 20px">
+    <input #taskInput type="text" placeholder="Add a new task..." style="padding: 8px" />
+    <button
+      (click)="addTask(taskInput.value); taskInput.value = ''"
+      style="padding: 8px; margin-left: 5px"
+    >
+      Add Task
+    </button>
+  </div>
+
+  <p>
+    Total Tasks: <strong>{{ totalTasks() }}</strong>
+  </p>
+
+  @for (taskItem of tasks(); track taskItem.id) {
+  <app-task-card [task]="taskItem" (deleteEvent)="deleteTask($event)"> </app-task-card>
+  } @empty {
+  <p>No tasks available.</p>
+  }
+</main>

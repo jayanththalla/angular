@@ -1,0 +1,16 @@
+<div class="card" [ngClass]="{ done: task.isCompleted }">
+  <h3>{{ task.title }}</h3>
+
+  @if (task.isCompleted) {
+  <span class="status-badge success">Completed</span>
+  } @else {
+  <span class="status-badge pending">Pending</span>
+  }
+
+  <button
+    (click)="onDelete()"
+    style="margin-left: auto; background: #ffcdd2; border: none; padding: 5px 10px; cursor: pointer"
+  >
+    Delete
+  </button>
+</div>
