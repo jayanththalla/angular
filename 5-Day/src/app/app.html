@@ -1,0 +1,37 @@
+<app-header></app-header>
+
+<main style="padding: 20px">
+  <form (ngSubmit)="addTask()" #taskForm="ngForm" style="margin-bottom: 20px">
+    <div style="display: flex; gap: 10px">
+      <input
+        type="text"
+        placeholder="Add a new task..."
+        style="padding: 8px; flex-grow: 1"
+        [(ngModel)]="newTaskTitle"
+        name="title"
+        required
+        minlength="3"
+        #titleInput="ngModel"
+      />
+
+      <button type="submit" style="padding: 8px" [disabled]="!taskForm.form.valid">Add Task</button>
+    </div>
+
+    @if (titleInput.invalid && (titleInput.dirty || titleInput.touched)) {
+    <div style="color: red; font-size: 0.8rem; margin-top: 5px">
+      @if (titleInput.errors?.['required']) { Task title is required. } @if
+      (titleInput.errors?.['minlength']) { Task must be at least 3 characters long. }
+    </div>
+    }
+  </form>
+
+  <p>
+    Total Tasks: <strong>{{ totalTasks() }}</strong>
+  </p>
+
+  @for (taskItem of tasks(); track taskItem.id) {
+  <app-task-card [task]="taskItem" (deleteEvent)="deleteTask($event)" (statusEvent)="toggleTask($event)"> </app-task-card>
+  } @empty {
+  <p>No tasks available.</p>
+  }
+</main>
