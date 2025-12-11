@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Shop Items</h1>
+
+  <input
+    [formControl]="searchControl"
+    type="text"
+    placeholder="Search products (e.g. Phone)..."
+    style="width: 100%; padding: 10px; margin-bottom: 20px; font-size: 1rem"
+  />
+
+  @if (products$ | async; as products) {
+  <div class="grid">
+    @for (item of products; track item.id) {
+    <div class="card" [routerLink]="['/product', item.id]">
+      <img [src]="item.image" [alt]="item.title" />
+      <h3>{{ item.title }}</h3>
+      <p class="price">${{ item.price }}</p>
+    </div>
+    }
+  </div>
+  } @else {
+  <p>Loading...</p>
+  }
+</div>

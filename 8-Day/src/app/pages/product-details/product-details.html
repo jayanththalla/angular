@@ -1,0 +1,17 @@
+<div class="container" style="padding: 2rem">
+  <a routerLink="/" style="text-decoration: underline; cursor: pointer">← Back to Shop</a>
+
+  @if (product(); as p) {
+  <div style="display: flex; gap: 40px; margin-top: 20px">
+    <img [src]="p.image" width="300" />
+    <div>
+      <h1>{{ p.title }}</h1>
+      <h2 style="color: green">${{ p.price }}</h2>
+      <p>{{ p.description }}</p>
+      <button style="padding: 10px 20px; background: black; color: white">Add to Cart</button>
+    </div>
+  </div>
+  } @else {
+  <p>Loading details...</p>
+  }
+</div>
